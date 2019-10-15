@@ -4,18 +4,21 @@ using UnityEngine.UI;
 using UnityEngine.Sprites;
 
 [AddComponentMenu("UI/Circle Image")]
-public class CircleImage : BaseImage {
+public class CircleImage : BaseImage
+{
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
         innerVertices = new List<Vector3>();
         outterVertices = new List<Vector3>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         this.thickness = (float)Mathf.Clamp(this.thickness, 0, rectTransform.rect.width / 2);
-	}
+    }
 
     [Tooltip("圆形或扇形填充比例")]
     [Range(0, 1)]
@@ -85,10 +88,10 @@ public class CircleImage : BaseImage {
                 outterVertices.Add(curVertice);
             }
 
-            triangleCount = curSegements*3;
+            triangleCount = curSegements * 3;
             for (int i = 0, vIdx = 1; i < triangleCount - 3; i += 3, vIdx++)
             {
-                vh.AddTriangle(vIdx, 0, vIdx+1);
+                vh.AddTriangle(vIdx, 0, vIdx + 1);
             }
             if (fillPercent == 1)
             {
@@ -98,7 +101,7 @@ public class CircleImage : BaseImage {
         }
         else//圆环
         {
-            verticeCount = curSegements*2;
+            verticeCount = curSegements * 2;
             for (int i = 0; i < verticeCount; i += 2)
             {
                 float cosA = Mathf.Cos(curDegree);
@@ -122,10 +125,10 @@ public class CircleImage : BaseImage {
                 outterVertices.Add(curVertice);
             }
 
-            triangleCount = curSegements*3*2;
+            triangleCount = curSegements * 3 * 2;
             for (int i = 0, vIdx = 0; i < triangleCount - 6; i += 6, vIdx += 2)
             {
-                vh.AddTriangle(vIdx+1, vIdx, vIdx+3);
+                vh.AddTriangle(vIdx + 1, vIdx, vIdx + 3);
                 vh.AddTriangle(vIdx, vIdx + 2, vIdx + 3);
             }
             if (fillPercent == 1)
