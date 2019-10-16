@@ -56,6 +56,9 @@ public class CircleImage : BaseImage
         float uvScaleX = (uv.z - uv.x) / tw;
         float uvScaleY = (uv.w - uv.y) / th;
 
+        //Debug.LogErrorFormat("tw: {0}, th: {1}, uv.x: {2}, uv.y: {3}, uv.z: {4}, uv.w: {5}, pivot.x: {6}",
+        //    tw, th, uv.x, uv.y, uv.z, uv.w, rectTransform.pivot.x);
+
         float curDegree = 0;
         UIVertex uiVertex;
         int verticeCount;
@@ -66,10 +69,12 @@ public class CircleImage : BaseImage
         {
             curVertice = Vector2.zero;
             verticeCount = curSegements + 1;
-            uiVertex = new UIVertex();
-            uiVertex.color = color;
-            uiVertex.position = curVertice;
-            uiVertex.uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);
+            uiVertex = new UIVertex
+            {
+                color = color,
+                position = curVertice,
+                uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY)
+            };
             vh.AddVert(uiVertex);
 
             for (int i = 1; i < verticeCount; i++)
@@ -79,10 +84,12 @@ public class CircleImage : BaseImage
                 curVertice = new Vector2(cosA * outerRadius, sinA * outerRadius);
                 curDegree += degreeDelta;
 
-                uiVertex = new UIVertex();
-                uiVertex.color = color;
-                uiVertex.position = curVertice;
-                uiVertex.uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);
+                uiVertex = new UIVertex
+                {
+                    color = color,
+                    position = curVertice,
+                    uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY)
+                };
                 vh.AddVert(uiVertex);
 
                 outterVertices.Add(curVertice);
@@ -109,18 +116,22 @@ public class CircleImage : BaseImage
                 curDegree += degreeDelta;
 
                 curVertice = new Vector3(cosA * innerRadius, sinA * innerRadius);
-                uiVertex = new UIVertex();
-                uiVertex.color = color;
-                uiVertex.position = curVertice;
-                uiVertex.uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);
+                uiVertex = new UIVertex
+                {
+                    color = color,
+                    position = curVertice,
+                    uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY)
+                };
                 vh.AddVert(uiVertex);
                 innerVertices.Add(curVertice);
 
                 curVertice = new Vector3(cosA * outerRadius, sinA * outerRadius);
-                uiVertex = new UIVertex();
-                uiVertex.color = color;
-                uiVertex.position = curVertice;
-                uiVertex.uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);
+                uiVertex = new UIVertex
+                {
+                    color = color,
+                    position = curVertice,
+                    uv0 = new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY)
+                };
                 vh.AddVert(uiVertex);
                 outterVertices.Add(curVertice);
             }
@@ -185,6 +196,4 @@ public class CircleImage : BaseImage
             }
         }
     }
-
-
 }
